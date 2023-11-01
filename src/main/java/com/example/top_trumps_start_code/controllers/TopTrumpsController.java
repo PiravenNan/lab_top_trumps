@@ -32,10 +32,11 @@ public class TopTrumpsController {
             return topTrumpService.checkWinner(cardList.get(0), cardList.get(1));
         }else{
             String errorMessage = "";
+
             if (!isCard1){
                 errorMessage += cardList.get(0).getRank()+" of "+ cardList.get(0).getSuit() + " is not in deck ";
-            }else{
             }
+
             if (!isCard2){
                 errorMessage += cardList.get(1).getRank()+" of "+ cardList.get(1).getSuit() + " is not in deck ";
             }

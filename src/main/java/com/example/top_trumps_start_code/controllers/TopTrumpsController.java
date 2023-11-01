@@ -17,31 +17,30 @@ public class TopTrumpsController {
     @Autowired
     TopTrumpService topTrumpService;
 
-//    @GetMapping
-//    public String getValue(){
-//        Card card = new Card(Rank.EIGHT, Suit.DIAMONDS);
-//        Card card2 = new Card(Rank.ACE, Suit.DIAMONDS);
-////        String checkedWinner = topTrumpService.checkWinner(card, card2);
-//        return topTrumpService.checkWinner(card, card2);
-//    }
-
-//
-//    @PostMapping
-//    public ResponseEntity<String>returnWinner(){
-//
-//    }
-
+    @GetMapping
+    public ArrayList<String> getGameStarted(){
+        topTrumpService.startNewGame();
+        return topTrumpService.getDeckOfcards();
+    }
 
     @PatchMapping
     public String handleCards(@RequestBody ArrayList<Card> cardList){
-        //Rank rankOne = Rank.valueOf(rank);
-        //Suit suitOne = Suit.valueOf(suit);;
-        //Card card = new Card(rankOne, suitOne);
-        //Card card2 = new Card(Rank.ACE, Suit.DIAMONDS);
-        topTrumpService.startNewGame();
-        //topTrumpService.addCards(cardList.get(0), cardList.get(1));
-        //String checkedWinner = topTrumpService.checkWinner(cardList.get(0), cardList.get(1));
-        return topTrumpService.checkWinner(cardList.get(0), cardList.get(1));;
+        Boolean isCard1 = topTrumpService.isCardStillInDeck(cardList.get(0));
+        Boolean isCard2 = topTrumpService.isCardStillInDeck(cardList.get(1));
+        if (isCard1 && isCard2 ){
+            topTrumpService.removeCardsFromDeck(cardList.get(0),cardList.get(1));
+            return topTrumpService.checkWinner(cardList.get(0), cardList.get(1));
+        }else{
+            String errorMessage = "";
+            if (!isCard1){
+                errorMessage += cardList.get(0).getRank()+" of "+ cardList.get(0).getSuit() + " is not in deck ";
+            }else{
+            }
+            if (!isCard2){
+                errorMessage += cardList.get(1).getRank()+" of "+ cardList.get(1).getSuit() + " is not in deck ";
+            }
+            return errorMessage;
+        }
     }
 
 

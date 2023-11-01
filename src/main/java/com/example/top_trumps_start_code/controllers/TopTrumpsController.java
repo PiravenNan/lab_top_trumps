@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @RestController
 @RequestMapping(value = "/toptrumps")
 public class TopTrumpsController {
@@ -31,15 +33,15 @@ public class TopTrumpsController {
 
 
     @PatchMapping
-    public String handleCards(@RequestBody String rank, String suit){
-        Rank rankOne = Rank.valueOf(rank);
-        Suit suitOne = Suit.valueOf(suit);
-        Card card = new Card(rankOne, suitOne);
-        Card card2 = new Card(Rank.ACE, Suit.DIAMONDS);
+    public String handleCards(@RequestBody ArrayList<Card> cardList){
+        //Rank rankOne = Rank.valueOf(rank);
+        //Suit suitOne = Suit.valueOf(suit);;
+        //Card card = new Card(rankOne, suitOne);
+        //Card card2 = new Card(Rank.ACE, Suit.DIAMONDS);
         topTrumpService.startNewGame();
-        topTrumpService.addCards(card, card2);
-        String checkedWinner = topTrumpService.checkWinner();
-        return checkedWinner;
+        //topTrumpService.addCards(cardList.get(0), cardList.get(1));
+        //String checkedWinner = topTrumpService.checkWinner(cardList.get(0), cardList.get(1));
+        return topTrumpService.checkWinner(cardList.get(0), cardList.get(1));;
     }
 
 

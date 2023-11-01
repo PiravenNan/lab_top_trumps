@@ -22,11 +22,11 @@ public class TopTrumpService {
         this.cards.add(card1);
     }
 
-    public String checkWinner(){
-        if (this.cards.get(0).getCardValue() > this.cards.get(1).getCardValue()){
-            return card.getSuit() + "wins!";
-        } else if (this.cards.get(1).getCardValue() > this.cards.get(1).getCardValue()){
-            return this.cards.get(1).getSuit() + " wins!";
+    public String checkWinner(Card card1, Card card2){
+        if (card1.getCardValue() > card2.getCardValue()){
+            return card1.getRank()+" of "+ card1.getSuit() + " wins!";
+        } else if (card2.getCardValue() > card1.getCardValue()){
+            return card2.getRank()+" of "+ card2.getSuit() + " wins!";
         } else {
             return "Draw!";
         }

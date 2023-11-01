@@ -13,17 +13,20 @@ public class TopTrumpService {
     private boolean higher;
     private ArrayList<Card> cards;
 
-    public TopTrumpService(Card card, boolean higher, ArrayList<Card> cards) {
-        this.card = card;
-        this.higher = higher;
-        this.cards = cards;
+    public void startNewGame(){
+        this.cards = new ArrayList<>();
     }
 
-    public String checkWinner(Card card, Card card2){
-        if (card.getCardValue() > card2.getCardValue()){
+    public void addCards(Card card, Card card1){
+        this.cards.add(card);
+        this.cards.add(card1);
+    }
+
+    public String checkWinner(){
+        if (this.cards.get(0).getCardValue() > this.cards.get(1).getCardValue()){
             return card.getSuit() + "wins!";
-        } else if (card2.getCardValue() > card.getCardValue()){
-            return card2.getSuit() + " wins!";
+        } else if (this.cards.get(1).getCardValue() > this.cards.get(1).getCardValue()){
+            return this.cards.get(1).getSuit() + " wins!";
         } else {
             return "Draw!";
         }

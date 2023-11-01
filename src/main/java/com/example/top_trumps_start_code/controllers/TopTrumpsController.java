@@ -15,22 +15,33 @@ public class TopTrumpsController {
     @Autowired
     TopTrumpService topTrumpService;
 
-    @GetMapping
-    public String getValue(){
-        Card card = new Card(Rank.EIGHT, Suit.DIAMONDS);
-        Card card2 = new Card(Rank.ACE, Suit.DIAMONDS);
-//        String checkedWinner = topTrumpService.checkWinner(card, card2);
-        return topTrumpService.checkWinner(card, card2);
-    }
-
-//
-//    @PatchMapping
-//    public String handleCards(@RequestBody Rank rank, Suit suit){
+//    @GetMapping
+//    public String getValue(){
 //        Card card = new Card(Rank.EIGHT, Suit.DIAMONDS);
 //        Card card2 = new Card(Rank.ACE, Suit.DIAMONDS);
-//        String checkedWinner = topTrumpService.checkWinner(card, card2);
-//        return checkedWinner;
+////        String checkedWinner = topTrumpService.checkWinner(card, card2);
+//        return topTrumpService.checkWinner(card, card2);
 //    }
+
+//
+//    @PostMapping
+//    public ResponseEntity<String>returnWinner(){
+//
+//    }
+
+
+    @PatchMapping
+    public String handleCards(@RequestBody String rank, String suit){
+        Rank rankOne = Rank.valueOf(rank);
+        Suit suitOne = Suit.valueOf(suit);
+        Card card = new Card(rankOne, suitOne);
+        Card card2 = new Card(Rank.ACE, Suit.DIAMONDS);
+        topTrumpService.startNewGame();
+        topTrumpService.addCards(card, card2);
+        String checkedWinner = topTrumpService.checkWinner();
+        return checkedWinner;
+    }
+
 
 
 

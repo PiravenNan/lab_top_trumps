@@ -17,7 +17,7 @@ public class TopTrumpsController {
     @Autowired
     TopTrumpService topTrumpService;
 
-    @GetMapping
+    @PostMapping
     public ArrayList<String> getGameStarted(){
         topTrumpService.startNewGame();
         return topTrumpService.getDeckOfcards();
@@ -43,8 +43,4 @@ public class TopTrumpsController {
             return errorMessage;
         }
     }
-
-
-
-
 }
